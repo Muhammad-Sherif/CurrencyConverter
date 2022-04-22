@@ -28,7 +28,7 @@ namespace Web.Controllers
 				return NotFound();
 
 			var exchangeRateDto = _mapper.Map<ExchangeRateDto>(exchangeRate);
-			return exchangeRateDto;
+			return Ok(exchangeRateDto);
 		}
 
 		[HttpPost]
