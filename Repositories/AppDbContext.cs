@@ -24,12 +24,12 @@ namespace Repositories
 			modelBuilder.Entity<Currency>().Property(c => c.IsActive).HasDefaultValue(true);
 
 
-			modelBuilder.Entity<ExchangeHistory>().HasOne(eh=>eh.Currency).WithMany().HasForeignKey(eh=>eh.CurrencyId);
+			modelBuilder.Entity<ExchangeRate>().HasOne(eh=>eh.Currency).WithMany().HasForeignKey(eh=>eh.CurrencyId);
 
 
 		}
 		public DbSet<Currency> Currencies { get; set; }
-		public DbSet<ExchangeHistory> ExchangesHistory { get; set; }
+		public DbSet<ExchangeRate> ExchangeRatesHistory { get; set; }
 
 	}
 }

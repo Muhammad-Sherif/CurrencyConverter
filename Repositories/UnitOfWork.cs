@@ -12,13 +12,13 @@ namespace Repositories
 	{
 		private readonly AppDbContext _context;
 		public IGenericRepository<Currency> Currencies { get; private set; }
-		public IGenericRepository<ExchangeHistory> ExchangesHistory { get; private set; }
+		public IGenericRepository<ExchangeRate> ExchangeRatesHistory { get; private set; }
 
 		public UnitOfWork(AppDbContext  context)
 		{
 			_context = context;
 			Currencies = new GenericRepository<Currency>(_context);
-			ExchangesHistory = new GenericRepository<ExchangeHistory>(_context);
+			ExchangeRatesHistory = new GenericRepository<ExchangeRate>(_context);
 
 		}
 		public void Dispose()
