@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-	public class ExchangeHistory
+	public class ExchangeRate
 	{
 		public int Id { get; set; }
 		public int CurrencyId{ get; set; }
