@@ -10,7 +10,7 @@ namespace Core.Repositories
 	public interface IUnitOfWork : IDisposable
 	{
 		public IGenericRepository<Currency> Currencies { get; }
-		public IGenericRepository<ExchangeRate> ExchangeRatesHistory { get; }
+		public IExchangeRatesRepository ExchangeRatesHistory { get; }
 		int SaveChanges();
 		Task<int> SaveChangesAsync();
 	}
