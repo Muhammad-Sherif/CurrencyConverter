@@ -19,7 +19,7 @@ namespace Web.Controllers
 			_mapper = mapper;
 			_context = context;
 		}
-		[HttpGet(Name =nameof(GetExchangeRate))]
+		[HttpGet(Name = nameof(GetExchangeRate))]
 
 		public async Task<ActionResult<ExchangeRateDto>> GetExchangeRate(int exchangeRateId)
 		{
@@ -34,7 +34,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public async Task<ActionResult<ExchangeRate>> AddExchangeRate(CreateExchangeRateDto createExchangeRateDto)
 		{
-			var currency = 
+			var currency =
 				await _context.Currencies.FirstOrDefaultAsync
 				(c => c.Id == createExchangeRateDto.CurrencyId && c.IsActive);
 			if (currency == null)
@@ -49,5 +49,25 @@ namespace Web.Controllers
 			return CreatedAtRoute(nameof(GetExchangeRate), new { exchangeRateId = exchangeRateDto.Id }, exchangeRateDto);
 
 		}
+		
+		[HttpGet("ConvertAmount/{Amount}/{fromCurrencyId}/{toCurrencyId}")]
+		public async Task<ActionResult<double>> ConvertAmount(double amount, int fromCurrencyId, int toCurrencyId)
+		{
+			var fromCurrency = await _context.Currencies.FirstOrDefaultAsync(c => c.Id == fromCurrencyId && c.IsActive);
+			var toCurrecny = await _context.Currencies.FirstOrDefaultAsync(c => c.Id == toCurrencyId  && c.IsActive);
+			if (fromCurrency == null || toCurrecny == null)
+				return NotFound();
+
+			var fromCurrencyRate = _context.ExchangeRatesHistory.GetLastDatedCurrencyRate(fromCurrencyId);
+			var toCurrencyRate = _context.ExchangeRatesHistory.GetLastDatedCurrencyRate(toCurrencyId);
+
+			if (fromCurrencyRate == null || toCurrencyRate == null)
+				return NotFound();
+
+			var convertedAmount = fromCurrencyRate.Rate * amount / toCurrencyRate.Rate;
+
+			return Ok(convertedAmount);
+		}
+
 	}
 }
