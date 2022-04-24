@@ -49,7 +49,20 @@ namespace Web.Controllers
 			return CreatedAtRoute(nameof(GetExchangeRate), new { exchangeRateId = exchangeRateDto.Id }, exchangeRateDto);
 
 		}
-		
+		[HttpGet("HighestNCurrenciesIds/{fromDate}/{toDate}/{n}")]
+		public IEnumerable<int> GetHighestNCurrencies(DateTime fromDate , DateTime toDate , int n)
+		{
+			return  _context.ExchangeRatesHistory.GetHighestNCurrenciesIds(fromDate , toDate , n);
+
+
+		}
+		[HttpGet("LowestNCurrenciesIds/{fromDate}/{toDate}/{n}")]
+		public IEnumerable<int> GetLowestNCurrencies(DateTime fromDate, DateTime toDate, int n)
+		{
+			return _context.ExchangeRatesHistory.GetLowesttNCurrenciesIds(fromDate, toDate, n);
+
+		}
+
 		[HttpGet("ConvertAmount/{Amount}/{fromCurrencyId}/{toCurrencyId}")]
 		public async Task<ActionResult<double>> ConvertAmount(double amount, int fromCurrencyId, int toCurrencyId)
 		{

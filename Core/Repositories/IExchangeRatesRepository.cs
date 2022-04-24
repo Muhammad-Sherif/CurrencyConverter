@@ -9,8 +9,8 @@ namespace Core.Repositories
 {
 	public interface IExchangeRatesRepository : IGenericRepository<ExchangeRate>
 	{
-		public IEnumerable<int> GetHighestNCurrencies(int n);
-		public IEnumerable<int> GetLowesttNCurrencies(int n);
+		public IEnumerable<int> GetHighestNCurrenciesIds(DateTime fromDate , DateTime toDateint , int n);
+		public IEnumerable<int> GetLowesttNCurrenciesIds(DateTime fromDate, DateTime toDate , int n);
 		public ExchangeRate GetLastDatedCurrencyRate(int currencyId);
 
 
