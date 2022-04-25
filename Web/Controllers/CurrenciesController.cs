@@ -53,6 +53,15 @@ namespace Web.Controllers
 		public async Task<ActionResult<CurrencyDto>> CreateCurrency(CreateCurrencyDto createCurrencyDto)
 		{
 			var currency = _mapper.Map<Currency>(createCurrencyDto);
+
+			var existedCurrencyWithName = await _context.Currencies.FirstOrDefaultAsync(c => c.Name == createCurrencyDto.Name);
+
+			if(existedCurrencyWithName != null)
+			{
+				ModelState.AddModelError(string.Empty, "CUrrency Name Exist");
+				return BadRequest(new ValidationProblemDetails(ModelState));
+			}
+
 			await _context.Currencies.AddAsync(currency);
 			_context.SaveChanges();
 

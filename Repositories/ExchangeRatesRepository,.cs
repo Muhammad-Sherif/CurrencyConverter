@@ -37,9 +37,7 @@ namespace Repositories
 			return
 			_context.ExchangeRatesHistory.Where
 			(er => er.CurrencyId == currencyId)
-			.OrderBy(er => er.ExchangeDate).FirstOrDefault();
-
-
+			.OrderByDescending(er => er.ExchangeDate).FirstOrDefault();
 
 		}
 

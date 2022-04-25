@@ -22,6 +22,7 @@ namespace Repositories
 
 
 			modelBuilder.Entity<Currency>().Property(c => c.Name).IsRequired().HasMaxLength(250);
+			modelBuilder.Entity<Currency>().HasIndex(c=>c.Name).IsUnique();
 			modelBuilder.Entity<Currency>().Property(c => c.Sign).IsRequired().HasMaxLength(250);
 			modelBuilder.Entity<Currency>().Property(c => c.IsActive).HasDefaultValue(true);
 
