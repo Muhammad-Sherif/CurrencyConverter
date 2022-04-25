@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Web.Dtos
+﻿
+namespace Services.Dtos
 {
 	public class ExchangeRateDto 
 	{

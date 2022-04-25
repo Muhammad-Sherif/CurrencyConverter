@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Web.Dtos
+namespace Services.Dtos
 {
 	public class RegisterDto
 	{

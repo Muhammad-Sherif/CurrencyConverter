@@ -1,4 +1,4 @@
-﻿namespace Web.Dtos
+﻿namespace Services.Dtos
 {
 	public class CurrencyDto
 	{

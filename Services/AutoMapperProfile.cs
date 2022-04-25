@@ -1,8 +1,9 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using Core.Models;
-using Web.Dtos;
+using Services.Dtos;
 
-namespace Web
+namespace Services
 {
 	public class AutoMapperProfile : Profile
 	{
