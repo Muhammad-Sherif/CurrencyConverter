@@ -3,7 +3,7 @@ using Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Web.Dtos;
+using Services.Dtos;
 
 namespace Web.Controllers
 {

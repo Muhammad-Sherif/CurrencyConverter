@@ -3,7 +3,7 @@ using Core.Models;
 using Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web.Dtos;
+using Services.Dtos;
 
 namespace Web.Controllers
 {
@@ -19,8 +19,7 @@ namespace Web.Controllers
 			_mapper = mapper;
 			_context = context;
 		}
-		[HttpGet(Name = nameof(GetExchangeRate))]
-
+		[HttpGet( "{Id}",  Name = nameof(GetExchangeRate))]
 		public async Task<ActionResult<ExchangeRateDto>> GetExchangeRate(int exchangeRateId)
 		{
 			var exchangeRate = await _context.ExchangeRatesHistory.FindByKeyAsync(exchangeRateId);
@@ -60,9 +59,7 @@ namespace Web.Controllers
 		public IEnumerable<int> GetLowestNCurrencies(DateTime fromDate, DateTime toDate, int n)
 		{
 			return _context.ExchangeRatesHistory.GetLowesttNCurrenciesIds(fromDate, toDate, n);
-
 		}
-
 		[HttpGet("ConvertAmount/{Amount}/{fromCurrencyId}/{toCurrencyId}")]
 		public async Task<ActionResult<double>> ConvertAmount(double amount, int fromCurrencyId, int toCurrencyId)
 		{
@@ -80,6 +77,17 @@ namespace Web.Controllers
 			var convertedAmount = fromCurrencyRate.Rate * amount / toCurrencyRate.Rate;
 
 			return Ok(convertedAmount);
+		}
+
+		[HttpGet("MostImprovedNCurrenciesIds/{fromDate}/{toDate}/{n}")]
+		public IEnumerable<int> GetMostImprovedNCurrenciesIds(DateTime fromDate, DateTime toDate, int n)
+		{
+			return _context.ExchangeRatesHistory.GetMostImprovedtNCurrenciesIds(fromDate, toDate, n);
+		}
+		[HttpGet("LeastImprovedNCurrenciesIds/{fromDate}/{toDate}/{n}")]
+		public IEnumerable<int> GetLeastImprovedNCurrenciesIds(DateTime fromDate, DateTime toDate, int n)
+		{
+			return _context.ExchangeRatesHistory.GetLeastImprovedtNCurrenciesIds(fromDate, toDate, n);
 		}
 
 	}

@@ -43,6 +43,26 @@ namespace Repositories
 
 		}
 
+		public IEnumerable<int> GetLeastImprovedtNCurrenciesIds(DateTime fromDate, DateTime toDate, int n)
+		{
+			var leastImprovedN = (from eh in _context.ExchangeRatesHistory
+							where eh.ExchangeDate >= fromDate && eh.ExchangeDate <= toDate
+							group eh by eh.CurrencyId into g
+							orderby g.Max(g => g.Rate) - g.Min(g => g.Rate) 
+							select g.Key).Take(n).ToList();
 
+			return leastImprovedN;
+		}
+
+		public IEnumerable<int> GetMostImprovedtNCurrenciesIds(DateTime fromDate, DateTime toDate, int n)
+		{
+			var mostImprovedN = (from eh in _context.ExchangeRatesHistory
+							where eh.ExchangeDate >= fromDate && eh.ExchangeDate <= toDate
+							group eh by eh.CurrencyId into g
+							orderby g.Max(g => g.Rate) - g.Min(g => g.Rate) descending
+							select g.Key).Take(n).ToList();
+
+			return mostImprovedN;
+		}
 	}
 }

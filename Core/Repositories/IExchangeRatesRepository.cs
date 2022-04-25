@@ -11,6 +11,8 @@ namespace Core.Repositories
 	{
 		public IEnumerable<int> GetHighestNCurrenciesIds(DateTime fromDate , DateTime toDateint , int n);
 		public IEnumerable<int> GetLowesttNCurrenciesIds(DateTime fromDate, DateTime toDate , int n);
+		public IEnumerable<int> GetLeastImprovedtNCurrenciesIds(DateTime fromDate, DateTime toDate , int n);
+		public IEnumerable<int> GetMostImprovedtNCurrenciesIds(DateTime fromDate, DateTime toDate , int n);
 		public ExchangeRate GetLastDatedCurrencyRate(int currencyId);
 
 
